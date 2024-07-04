@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Notes</title>
+    <link rel="stylesheet" href="./output.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="m-0 font-sans box-border min-h-screen bg-sky-200">
+    
+    <div id="navBar" class="fixed top-0 min-w-full h-16 bg-zinc-600 text-sky-200 p-4 flex items-center justify-between">
+        <a href="./index.html">
+            <button>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="hover:scale-125 bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+                </svg>
+            </button>
+        </a>
+        <h1 class="text-2xl font-semibold">Your Notes</h1>
+    </div>
+
+    <div id="notesAlert" class=" hidden w-1/3 bg-zinc-700 absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] rounded-3xl text-sky-200 p-2 text-center">
+        <h1 class="text-xl font-semibold">No notes are added! <br> Please add notes to show here.</h1>
+    </div>
+
+    <div id="notesShow">
+        <div id="selectDate" class="absolute top-20 right-5">
+            
+        </div>
+
+        <div id="notesQuad" class=" mt-10 w-3/4 h-2/3 p-4 border border-dashed border-zinc-700 absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
+            <div class="w-full h-full flex flex-col gap-4">
+                <div class="flex gap-4 h-1/2 ">
+                    <div id="firstQuad" class="quadrant w-1/2  bg-zinc-700 text-sky-200 p-2 ">
+                        <h1 class="font-bold text-lg">URGENT PRIORITIES</h1>
+                    </div>
+                    <div id="secondQuad" class="quadrant w-1/2  bg-sky-200 text-zinc-700 p-2 border border-zinc-700 ">
+                        <h1 class="font-bold text-lg">STRATEGIC PLANNING</h1>
+                    </div>
+                </div>
+                <div class="flex gap-4 h-1/2 ">
+                    <div id="thirdQuad" class="quadrant w-1/2 bg-sky-200 text-zinc-700 p-2 border border-zinc-700 ">
+                        <h1 class="font-bold text-lg">WELLBEING ROUTINE</h1>
+                    </div>
+                    <div id="fourthQuad" class="quadrant w-1/2 bg-zinc-700 text-sky-200 p-2 ">
+                        <h1 class="font-bold text-lg">DAILY ESSENTIALS</h1>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    
+    </div>
+
+    <script src="./showNote.js"></script>
+</body>
+</html>

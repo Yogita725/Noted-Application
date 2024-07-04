@@ -1,0 +1,9 @@
+.main-body-after{
+    opacity: 0.1;
+}
+
+.quadrant {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
