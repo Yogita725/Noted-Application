@@ -7,9 +7,56 @@ let thirdQuad = document.querySelector('#thirdQuad');
 let fourthQuad = document.querySelector('#fourthQuad');
 
 
+let notesShow = document.getElementById("notesShow");
 let notesAlert = document.getElementById("notesAlert");
-if(notes[0].date == ''){
+if(notes.length == 0){
     notesAlert.classList.remove("hidden");
+    notesShow.classList.add("hidden");
+}
+else{
+    notesAlert.classList.add("hidden");
+    notesShow.classList.remove("hidden");
+}
+
+function createCheckbox(title, desc, noteId){
+    notes = JSON.parse(localStorage.getItem('notes'))||[];
+    let checkboxDiv = document.createElement('div');
+    // checkboxDiv.classList.add('checkbox-item'); // Optional: add a class for styling
+
+    // Create the checkbox input element
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = noteId;
+    checkbox.classList.add('m-2','p-2')
+
+    // Create the label element
+    const label = document.createElement('label');
+    label.htmlFor = noteId;
+    label.innerText = title+" : " +desc;
+
+    if(notes[noteId].isCompleted == true){
+        label.style.textDecoration = 'line-through';
+        checkbox.checked = true;
+    }
+
+    checkbox.addEventListener('change', function() {
+        if (checkbox.checked) {
+            notes[noteId].isCompleted = true;
+            label.style.textDecoration = 'line-through';
+        } else {
+            notes[noteId].isCompleted = false;
+            label.style.textDecoration = 'none';
+        }
+        localStorage.setItem('notes',JSON.stringify(notes));
+    });
+
+    // Append the checkbox and label to the div
+    checkboxDiv.appendChild(checkbox);
+    checkboxDiv.appendChild(label);
+
+
+
+    return checkboxDiv;
 }
 
 function getSelectedDate(selectedDate){
@@ -23,45 +70,41 @@ function getSelectedDate(selectedDate){
     console.log(dailyArr);
 
     urgentArr.forEach((note) => {
-        let h1 = document.createElement("h1");
+        let checkboxDiv = createCheckbox(note.title, note.description, note.noteId);
         let h2 = document.createElement("h2");
         let br = document.createElement("br");
-        h1.innerText=note.title + " : " + note.description;
         h2.innerText = "Deadline : " + note.endDate;
-        firstQuad.appendChild(h1);
+        firstQuad.appendChild(checkboxDiv);
         note.endDate!=''? firstQuad.appendChild(h2):"";
         firstQuad.appendChild(br);
     });
 
     strategyArr.forEach((note) => {
-        let h1 = document.createElement("h1");
+        let checkboxDiv = createCheckbox(note.title, note.description, note.noteId);
         let h2 = document.createElement("h2");
         let br = document.createElement("br");
-        h1.innerText=note.title + " : " + note.description;
         h2.innerText = "Deadline : " + note.endDate;
-        secondQuad.appendChild(h1);
+        secondQuad.appendChild(checkboxDiv);
         note.endDate!=''? secondQuad.appendChild(h2):"";
         secondQuad.appendChild(br);
     });
 
     wellbeingArr.forEach((note) => {
-        let h1 = document.createElement("h1");
+        let checkboxDiv = createCheckbox(note.title, note.description, note.noteId);
         let h2 = document.createElement("h2");
         let br = document.createElement("br");
-        h1.innerText=note.title + " : " + note.description ;
         h2.innerText = "Deadline : " + note.endDate;
-        thirdQuad.appendChild(h1);
+        thirdQuad.appendChild(checkboxDiv);
         note.endDate!=''? thirdQuad.appendChild(h2):"";
         thirdQuad.appendChild(br);
     });
 
     dailyArr.forEach((note) => {
-        let h1 = document.createElement("h1");
+        let checkboxDiv = createCheckbox(note.title, note.description, note.noteId);
         let h2 = document.createElement("h2");
         let br = document.createElement("br");
-        h1.innerText=note.title + " : " + note.description ;
         h2.innerText = "Deadline : " + note.endDate;
-        fourthQuad.appendChild(h1);
+        fourthQuad.appendChild(checkboxDiv);
         note.endDate!=''? fourthQuad.appendChild(h2):"";
         fourthQuad.appendChild(br);
     });

@@ -1,12 +1,15 @@
+// localStorage.clear();
 let notes = JSON.parse(localStorage.getItem('notes')) || [];
 
 if (notes.length === 0) {
     for (let i = 0; i < 500; i++) {
-        notes.push({title: '', description: '', date:'',endDate:'',category:''});
+        notes.push({noteId:i,title: '', description: '', date:'',endDate:'',category:'',isCompleted:false});
     }
 }
 
-let noteNum =JSON.parse(localStorage.getItem('noteNum')) ||   0;
+let noteIds = notes.filter(note=>note.date=='');
+let noteNum = noteIds[0].noteId;
+console.log(noteNum);
 
 let mainPage = document.querySelector('#mainPage');
 let addNote= document.querySelector("#addNote");
@@ -61,8 +64,6 @@ function saveNote(noteTitle,noteDesc,noteEndDate,noteDate,noteCategory){
     setTimeout(()=>{
         noteAdded.classList.add("hidden");
     },1000)
-    noteNum++;
-    localStorage.setItem("noteNum",JSON.stringify(noteNum));
 }
 
 function renderingNotes(){  

@@ -7,3 +7,8 @@
     flex-direction: column;
     overflow-y: auto;
 }
+
+.lineThrough{
+    text-decoration: line-through;
+}
+
