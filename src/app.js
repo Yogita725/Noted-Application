@@ -7,10 +7,6 @@ if (notes.length === 0) {
     }
 }
 
-let noteIds = notes.filter(note=>note.date=='');
-let noteNum = noteIds[0].noteId;
-console.log(noteNum);
-
 let mainPage = document.querySelector('#mainPage');
 let addNote= document.querySelector("#addNote");
 let openTaskForm = document.querySelector("#openTaskForm");
@@ -49,7 +45,7 @@ cross.addEventListener('click',()=>{
     openTaskForm.classList.add("hidden");
 })
 
-function saveNote(noteTitle,noteDesc,noteEndDate,noteDate,noteCategory){
+function saveNote(noteTitle,noteDesc,noteEndDate,noteDate,noteCategory,noteNum){
     notes[noteNum].title = noteTitle;
     notes[noteNum].description = noteDesc;
     notes[noteNum].endDate = noteEndDate;
@@ -66,7 +62,7 @@ function saveNote(noteTitle,noteDesc,noteEndDate,noteDate,noteCategory){
     },1000)
 }
 
-function renderingNotes(){  
+function renderingNotes(noteNum){  
     let end = deadLine.value.split("T");
     let category;
     if(urgent.checked){
@@ -100,12 +96,23 @@ function renderingNotes(){
         alert("Please add the Description of your note.");
     }
     else{
-        saveNote(noteTitle,noteDesc,noteEndDate,noteDate,noteCategory );
+        saveNote(noteTitle,noteDesc,noteEndDate,noteDate,noteCategory,noteNum );
     }
 }
   
 addingNote.addEventListener('click',()=>{
-    renderingNotes();
+    notes = JSON.parse(localStorage.getItem('notes'))||[];
+
+    if (notes.length === 0) {
+        for (let i = 0; i < 500; i++) {
+            notes.push({noteId:i,title: '', description: '', date:'',endDate:'',category:'',isCompleted:false});
+        }
+    }
+
+    let noteIds = notes.filter(note=>note.date=='');
+    let noteNum = noteIds[0].noteId;
+    console.log(noteNum);
+    renderingNotes(noteNum);
     localStorage.setItem("notes",JSON.stringify(notes));
     // console.log(notes);
     title.value='';
